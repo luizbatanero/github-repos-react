@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Loading = styled.div`
   color: #fff;
@@ -42,10 +42,32 @@ export const Owner = styled.div`
   }
 `;
 
-export const IssueList = styled.ul`
-  padding-top: 30px;
+export const IssueFilter = styled.div`
+  display: flex;
   margin-top: 30px;
   border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+`;
+
+export const FilterButton = styled.button`
+  flex: 1;
+  border: 0;
+  padding: 15px 0;
+  background: #fff;
+
+  ${props =>
+    props.active
+      ? css`
+          color: #7159c1;
+          font-weight: bold;
+        `
+      : css`
+          color: #333;
+        `}
+`;
+
+export const IssueList = styled.ul`
+  padding-top: 30px;
   list-style: none;
 
   li {

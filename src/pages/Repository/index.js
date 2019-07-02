@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import api from '../../services/api';
 
 import Container from '../../components/Container';
-import { Loading, Owner, IssueList } from './styles';
+import { Loading, Owner, IssueList, IssueFilter, FilterButton } from './styles';
 
 class Repository extends Component {
   static propTypes = {
@@ -18,12 +18,15 @@ class Repository extends Component {
 
   state = {
     repository: {},
+    filter: 'all',
     issues: [],
     loading: true,
+    page: 1,
   };
 
   async componentDidMount() {
     const { match } = this.props;
+    const { filter, page } = this.state;
 
     const repoName = decodeURIComponent(match.params.repository);
 
@@ -31,8 +34,9 @@ class Repository extends Component {
       api.get(`/repos/${repoName}`),
       api.get(`/repos/${repoName}/issues`, {
         params: {
-          state: 'open',
+          state: filter,
           per_page: 5,
+          page,
         },
       }),
     ]);
@@ -44,8 +48,26 @@ class Repository extends Component {
     });
   }
 
+  handleFilterChange = async filter => {
+    const { match } = this.props;
+
+    const repoName = decodeURIComponent(match.params.repository);
+
+    this.setState({ filter, page: 1 });
+
+    const issues = await api.get(`/repos/${repoName}/issues`, {
+      params: {
+        state: filter,
+        per_page: 5,
+        page: 1,
+      },
+    });
+
+    this.setState({ issues: issues.data });
+  };
+
   render() {
-    const { repository, issues, loading } = this.state;
+    const { repository, issues, loading, filter } = this.state;
 
     if (loading) {
       return <Loading>Carregando</Loading>;
@@ -59,6 +81,30 @@ class Repository extends Component {
           <h1>{repository.name}</h1>
           <p>{repository.description}</p>
         </Owner>
+
+        <IssueFilter>
+          <FilterButton
+            type="button"
+            active={filter === 'all'}
+            onClick={() => this.handleFilterChange('all')}
+          >
+            Todas Issues
+          </FilterButton>
+          <FilterButton
+            type="button"
+            active={filter === 'open'}
+            onClick={() => this.handleFilterChange('open')}
+          >
+            Em aberto
+          </FilterButton>
+          <FilterButton
+            type="button"
+            active={filter === 'closed'}
+            onClick={() => this.handleFilterChange('closed')}
+          >
+            Fechadas
+          </FilterButton>
+        </IssueFilter>
 
         <IssueList>
           {issues.map(issue => (
