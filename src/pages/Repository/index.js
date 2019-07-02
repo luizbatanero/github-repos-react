@@ -160,7 +160,12 @@ class Repository extends Component {
 
         <IssueList>
           {issues.map(issue => (
-            <a href={issue.html_url} key={String(issue.id)}>
+            <a
+              href={issue.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              key={String(issue.id)}
+            >
               <img src={issue.user.avatar_url} alt={issue.user.login} />
               <div>
                 <strong>
