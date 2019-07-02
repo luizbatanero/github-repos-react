@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import chroma from 'chroma-js';
-import { FaArrowRight, FaArrowLeft, FaSpinner } from 'react-icons/fa';
+import { FaArrowRight, FaArrowLeft, FaSpinner, FaStar } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -90,8 +90,6 @@ class Repository extends Component {
 
     const repoName = decodeURIComponent(match.params.repository);
 
-    this.setState({ page });
-
     const issues = await api.get(`/repos/${repoName}/issues`, {
       params: {
         state: filter,
@@ -102,6 +100,7 @@ class Repository extends Component {
 
     this.setState({
       issues: issues.data,
+      page,
       nextPage: Boolean(
         issues.headers.link && issues.headers.link.includes('next')
       ),
@@ -122,10 +121,17 @@ class Repository extends Component {
     return (
       <Container>
         <Owner>
-          <Link to="/">Voltar aos repositórios</Link>
+          <Link to="/">
+            <FaArrowLeft />
+            <span>Voltar</span>
+          </Link>
           <img src={repository.owner.avatar_url} alt={repository.owner.login} />
           <h1>{repository.name}</h1>
           <p>{repository.description}</p>
+          <span className="stars">
+            <FaStar />
+            {repository.stargazers_count}
+          </span>
         </Owner>
 
         <IssueFilter>
@@ -154,11 +160,11 @@ class Repository extends Component {
 
         <IssueList>
           {issues.map(issue => (
-            <li key={String(issue.id)}>
+            <a href={issue.html_url} key={String(issue.id)}>
               <img src={issue.user.avatar_url} alt={issue.user.login} />
               <div>
                 <strong>
-                  <a href={issue.html_url}>{issue.title}</a>
+                  {issue.title}
                   {issue.labels.map(label => (
                     <span
                       key={String(label.id)}
@@ -176,7 +182,7 @@ class Repository extends Component {
                 </strong>
                 <p>{issue.user.login}</p>
               </div>
-            </li>
+            </a>
           ))}
         </IssueList>
 

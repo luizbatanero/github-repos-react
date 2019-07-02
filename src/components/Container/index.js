@@ -4,9 +4,14 @@ const Container = styled.div`
   max-width: 700px;
   background: #fff;
   border-radius: 4px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  padding: 30px;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+  padding: 40px;
   margin: 80px auto;
+
+  @media (max-width: 768px) {
+    margin: 25px auto;
+    padding: 25px;
+  }
 
   h1 {
     font-size: 20px;

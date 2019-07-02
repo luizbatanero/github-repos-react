@@ -29,17 +29,43 @@ export const Owner = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 
   a {
-    color: #7159c1;
+    color: #888;
     font-size: 16px;
     text-decoration: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.3s;
+
+    &:hover {
+      color: #7159c1;
+      transform: translateX(-2px);
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+      transition: color 0.3s;
+    }
+
+    span {
+      text-transform: lowercase;
+      font-weight: 500;
+      font-size: 13px;
+      margin-left: 6px;
+      transform: translateY(-1px);
+      transition: color 0.3s;
+    }
   }
 
   img {
     width: 120px;
     border-radius: 50%;
-    margin-top: 20px;
   }
 
   h1 {
@@ -55,6 +81,22 @@ export const Owner = styled.div`
     text-align: center;
     max-width: 400px;
   }
+
+  .stars {
+    display: inline-flex;
+    margin-top: 10px;
+    align-items: center;
+    font-size: 11px;
+    font-weight: bold;
+    color: #666;
+    letter-spacing: 0.5px;
+
+    svg {
+      color: #7159c1;
+      transform: translateY(-1px);
+      margin-right: 4px;
+    }
+  }
 `;
 
 export const IssueFilter = styled.div`
@@ -69,6 +111,10 @@ export const FilterButton = styled.button`
   border: 0;
   padding: 15px 0;
   background: #fff;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+  transition: color 0.3s;
 
   ${props =>
     props.active
@@ -77,21 +123,27 @@ export const FilterButton = styled.button`
           font-weight: bold;
         `
       : css`
-          color: #333;
+          color: #777;
+
+          &:hover {
+            color: #444;
+          }
         `}
 `;
 
-export const IssueList = styled.ul`
+export const IssueList = styled.div`
   padding-top: 30px;
-  list-style: none;
 
-  li {
+  a {
     display: flex;
     padding: 15px 10px;
     border: 1px solid #eee;
     border-radius: 4px;
+    transition: box-shadow 0.3s, transform 0.3s;
+    text-decoration: none;
+    transform: translateZ(0);
 
-    & + li {
+    & + a {
       margin-top: 10px;
     }
 
@@ -108,15 +160,8 @@ export const IssueList = styled.ul`
 
       strong {
         font-size: 16px;
-
-        a {
-          text-decoration: none;
-          color: #333;
-
-          &:hover {
-            color: #7159c1;
-          }
-        }
+        color: #333;
+        transition: color 0.2s;
 
         span {
           background: #eee;
@@ -141,6 +186,22 @@ export const IssueList = styled.ul`
         color: #999;
       }
     }
+
+    &:hover {
+      color: #7159c1;
+      border-color: #ccc;
+      transform: translateY(-2px) translateZ(0);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+
+      strong {
+        color: #7159c1;
+      }
+    }
+
+    &:active {
+      transform: translate(0);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
   }
 `;
 
@@ -157,7 +218,8 @@ export const Pagination = styled.div`
     display: inline-flex;
     line-height: 1;
     align-items: center;
-    font-size: 16px;
+    font-size: 20px;
+    transition: all 0.3s;
 
     &.anterior {
       margin-right: auto;
@@ -168,6 +230,14 @@ export const Pagination = styled.div`
 
     &:hover {
       color: #7159c1;
+      border-color: #ccc;
+      transform: translateY(-2px);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    }
+
+    &:active {
+      transform: translate(0);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     }
   }
 `;

@@ -23,9 +23,11 @@ export const FormInput = styled.input.attrs(props => ({
 }))`
   flex: 1;
   border: 1px solid ${props => (props.error ? '#d45353' : '#eee')};
-  padding: 10px 15px;
+  padding: 0 15px;
+  height: 60px;
   border-radius: 4px;
   font-size: 16px;
+  min-width: 0;
 
   &[disabled] {
     cursor: not-allowed;
@@ -48,9 +50,9 @@ export const SubmitButton = styled.button.attrs(props => ({
 }))`
   background: #7159c1;
   border: 0;
-  padding: 0 15px;
   margin-left: 10px;
   border-radius: 4px;
+  width: 60px;
 
   display: flex;
   justify-content: center;
