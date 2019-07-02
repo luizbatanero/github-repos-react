@@ -4,6 +4,18 @@ export const Form = styled.form`
   margin-top: 30px;
   display: flex;
   flex-direction: row;
+  position: relative;
+
+  .error {
+    position: absolute;
+    left: 0;
+    bottom: -17px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #d45353;
+    display: inline-block;
+    border-bottom: 1px solid #d45353;
+  }
 `;
 
 export const FormInput = styled.input.attrs(props => ({

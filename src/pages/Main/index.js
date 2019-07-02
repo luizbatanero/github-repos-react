@@ -12,7 +12,7 @@ class Main extends Component {
     newRepo: '',
     repositories: [],
     isLoading: false,
-    error: false,
+    error: '',
   };
 
   componentDidMount() {
@@ -43,6 +43,10 @@ class Main extends Component {
     try {
       const { newRepo, repositories } = this.state;
 
+      if (repositories.find(repo => repo.name === newRepo)) {
+        throw new Error('Repositório duplicado');
+      }
+
       const response = await api.get(`/repos/${newRepo}`);
 
       const data = {
@@ -53,11 +57,14 @@ class Main extends Component {
         repositories: [...repositories, data],
         newRepo: '',
         isLoading: false,
+        error: '',
       });
     } catch (err) {
       this.setState({
         isLoading: false,
-        error: true,
+        error: err.message.includes('404')
+          ? 'Repositório não encontrado'
+          : err.message,
       });
     }
   };
@@ -81,14 +88,14 @@ class Main extends Component {
             isLoading={isLoading}
             error={error}
           />
-
-          <SubmitButton isLoading={isLoading}>
+          <SubmitButton isLoading={isLoading} disabled={!newRepo.length}>
             {isLoading ? (
               <FaSpinner color="#FFF" size={14} />
             ) : (
               <FaPlus color="#FFF" size={14} />
             )}
           </SubmitButton>
+          {error && <div className="error">{error}</div>}
         </Form>
 
         <List>
