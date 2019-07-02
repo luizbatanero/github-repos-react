@@ -4,13 +4,20 @@ export const Form = styled.form`
   margin-top: 30px;
   display: flex;
   flex-direction: row;
+`;
 
-  input {
-    flex: 1;
-    border: 1px solid #eee;
-    padding: 10px 15px;
-    border-radius: 4px;
-    font-size: 16px;
+export const FormInput = styled.input.attrs(props => ({
+  disabled: props.isLoading,
+}))`
+  flex: 1;
+  border: 1px solid ${props => (props.error ? '#d45353' : '#eee')};
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-size: 16px;
+
+  &[disabled] {
+    cursor: not-allowed;
+    background: #eee;
   }
 `;
 
@@ -25,7 +32,7 @@ const rotate = keyframes`
 
 export const SubmitButton = styled.button.attrs(props => ({
   type: 'submit',
-  disabled: props.loading,
+  disabled: props.isLoading,
 }))`
   background: #7159c1;
   border: 0;
@@ -43,7 +50,7 @@ export const SubmitButton = styled.button.attrs(props => ({
   }
 
   ${props =>
-    props.loading &&
+    props.isLoading &&
     css`
       svg {
         animation: ${rotate} 2s linear infinite;
