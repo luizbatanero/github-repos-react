@@ -104,6 +104,10 @@ export const IssueFilter = styled.div`
   margin-top: 30px;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const FilterButton = styled.button`
@@ -115,6 +119,14 @@ export const FilterButton = styled.button`
   font-weight: 500;
   font-size: 12px;
   transition: color 0.3s;
+
+  @media (max-width: 768px) {
+    padding: 10px 0;
+
+    & + button {
+      padding-top: 0;
+    }
+  }
 
   ${props =>
     props.active
