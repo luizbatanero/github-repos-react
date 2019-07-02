@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import chroma from 'chroma-js';
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -155,7 +156,18 @@ class Repository extends Component {
                 <strong>
                   <a href={issue.html_url}>{issue.title}</a>
                   {issue.labels.map(label => (
-                    <span key={String(label.id)}>{label.name}</span>
+                    <span
+                      key={String(label.id)}
+                      style={{
+                        backgroundColor: `#${label.color}`,
+                        color:
+                          chroma(`#${label.color}`).get('lab.l') > 70
+                            ? '#222'
+                            : '#fff',
+                      }}
+                    >
+                      {label.name}
+                    </span>
                   ))}
                 </strong>
                 <p>{issue.user.login}</p>

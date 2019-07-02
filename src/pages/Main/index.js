@@ -10,7 +10,7 @@ import { Form, FormInput, SubmitButton, List } from './styles';
 class Main extends Component {
   state = {
     newRepo: '',
-    repositories: [],
+    repositories: [{ name: 'Rocketseat/unform' }],
     isLoading: false,
     error: '',
   };

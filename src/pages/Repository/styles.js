@@ -112,6 +112,11 @@ export const IssueList = styled.ul`
           height: 20px;
           padding: 3px 4px;
           margin-left: 10px;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+
+          & + span {
+            margin-left: 5px;
+          }
         }
       }
 
