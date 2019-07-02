@@ -133,7 +133,7 @@ export const List = styled.ul`
         height: 36px;
         border-radius: 50%;
         border: 2px solid #eee;
-        flex: 0 1 36px;
+        flex: 0 0 36px;
       }
 
       span {
