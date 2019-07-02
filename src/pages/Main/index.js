@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { FaGithubAlt, FaPlus, FaSpinner } from 'react-icons/fa';
+import { FaGithubAlt, FaPlus, FaSpinner, FaTrashAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 import api from '../../services/api';
 
 import Container from '../../components/Container';
-import { Form, FormInput, SubmitButton, List } from './styles';
+import { Logo, Form, FormInput, SubmitButton, List } from './styles';
 
 class Main extends Component {
   state = {
@@ -20,6 +20,15 @@ class Main extends Component {
 
     if (repositories) {
       this.setState({ repositories: JSON.parse(repositories) });
+    } else {
+      this.setState({
+        repositories: [
+          {
+            name: 'twbs/bootstrap',
+            ownerAvatar: 'https://avatars0.githubusercontent.com/u/2918581?v=4',
+          },
+        ],
+      });
     }
   }
 
@@ -51,6 +60,7 @@ class Main extends Component {
 
       const data = {
         name: response.data.full_name,
+        ownerAvatar: response.data.owner.avatar_url,
       };
 
       this.setState({
@@ -69,15 +79,22 @@ class Main extends Component {
     }
   };
 
+  handleRemove = repositoryName => {
+    this.setState(state => ({
+      repositories: state.repositories.filter(
+        repo => repo.name !== repositoryName
+      ),
+    }));
+  };
+
   render() {
     const { newRepo, repositories, isLoading, error } = this.state;
 
     return (
       <Container>
-        <h1>
+        <Logo>
           <FaGithubAlt />
-          Repositórios
-        </h1>
+        </Logo>
 
         <Form onSubmit={this.handleSubmit}>
           <FormInput
@@ -101,10 +118,16 @@ class Main extends Component {
         <List>
           {repositories.map(repository => (
             <li key={repository.name}>
-              <span>{repository.name}</span>
               <Link to={`/repository/${encodeURIComponent(repository.name)}`}>
-                Detalhes
+                <img src={repository.ownerAvatar} alt={repository.name} />
+                <span>{repository.name}</span>
               </Link>
+              <button
+                type="button"
+                onClick={() => this.handleRemove(repository.name)}
+              >
+                <FaTrashAlt />
+              </button>
             </li>
           ))}
         </List>

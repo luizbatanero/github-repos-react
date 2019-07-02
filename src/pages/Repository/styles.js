@@ -152,11 +152,12 @@ export const IssueList = styled.div`
       height: 36px;
       border-radius: 50%;
       border: 2px solid #eee;
+      flex: 0 0 36px;
     }
 
     div {
       flex: 1;
-      margin-left: 15px;
+      margin-left: 12px;
 
       strong {
         font-size: 16px;
@@ -176,6 +177,14 @@ export const IssueList = styled.div`
 
           & + span {
             margin-left: 5px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          font-size: 14px;
+
+          span {
+            font-size: 10px;
           }
         }
       }

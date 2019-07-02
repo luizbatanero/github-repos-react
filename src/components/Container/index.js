@@ -7,9 +7,10 @@ const Container = styled.div`
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
   padding: 40px;
   margin: 80px auto;
+  position: relative;
 
   @media (max-width: 768px) {
-    margin: 25px auto;
+    margin: 45px auto 25px;
     padding: 25px;
   }
 
