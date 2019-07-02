@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import chroma from 'chroma-js';
-import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
+import { FaArrowRight, FaArrowLeft, FaSpinner } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -112,7 +112,11 @@ class Repository extends Component {
     const { repository, issues, loading, filter, page, nextPage } = this.state;
 
     if (loading) {
-      return <Loading>Carregando</Loading>;
+      return (
+        <Loading>
+          <FaSpinner />
+        </Loading>
+      );
     }
 
     return (
