@@ -123,7 +123,7 @@ class Repository extends Component {
         <Owner>
           <Link to="/">
             <FaArrowLeft />
-            <span>Voltar</span>
+            <span>Back</span>
           </Link>
           <img src={repository.owner.avatar_url} alt={repository.owner.login} />
           <h1>{repository.name}</h1>
@@ -140,21 +140,21 @@ class Repository extends Component {
             active={filter === 'all'}
             onClick={() => this.handleFilterChange('all')}
           >
-            Todas Issues
+            All Issues
           </FilterButton>
           <FilterButton
             type="button"
             active={filter === 'open'}
             onClick={() => this.handleFilterChange('open')}
           >
-            Em aberto
+            Open
           </FilterButton>
           <FilterButton
             type="button"
             active={filter === 'closed'}
             onClick={() => this.handleFilterChange('closed')}
           >
-            Fechadas
+            Closed
           </FilterButton>
         </IssueFilter>
 

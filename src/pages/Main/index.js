@@ -53,7 +53,7 @@ class Main extends Component {
       const { newRepo, repositories } = this.state;
 
       if (repositories.find(repo => repo.name === newRepo)) {
-        throw new Error('Repositório duplicado');
+        throw new Error('Duplicated repository');
       }
 
       const response = await api.get(`/repos/${newRepo}`);
@@ -73,7 +73,7 @@ class Main extends Component {
       this.setState({
         isLoading: false,
         error: err.message.includes('404')
-          ? 'Repositório não encontrado'
+          ? 'Repository not found'
           : err.message,
       });
     }
@@ -99,7 +99,7 @@ class Main extends Component {
         <Form onSubmit={this.handleSubmit}>
           <FormInput
             type="text"
-            placeholder="Adicionar repositório"
+            placeholder="Add repository"
             value={newRepo}
             onChange={this.handleInputChange}
             isLoading={isLoading}
