@@ -146,6 +146,16 @@ export const FilterButton = styled.button`
 export const IssueList = styled.div`
   padding-top: 30px;
 
+  .no-issues {
+    border: 1px solid #eee;
+    border-radius: 3px;
+    text-align: center;
+    padding: 15px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #7159c1;
+  }
+
   a {
     display: flex;
     padding: 15px 10px;

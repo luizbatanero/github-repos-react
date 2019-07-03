@@ -159,6 +159,9 @@ class Repository extends Component {
         </IssueFilter>
 
         <IssueList>
+          {!issues.length && (
+            <p className="no-issues">There aren’t any issues.</p>
+          )}
           {issues.map(issue => (
             <a
               href={issue.html_url}
