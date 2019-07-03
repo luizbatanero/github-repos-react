@@ -119,7 +119,7 @@ class Repository extends Component {
     }
 
     return (
-      <Container>
+      <Container innerPage>
         <Owner>
           <Link to="/">
             <FaArrowLeft />

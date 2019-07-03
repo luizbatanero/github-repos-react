@@ -6,11 +6,11 @@ const Container = styled.div`
   border-radius: 4px;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
   padding: 40px;
-  margin: 80px auto;
+  margin: ${props => (props.innerPage ? '40px' : '80px')} auto 80px;
   position: relative;
 
   @media (max-width: 768px) {
-    margin: 45px auto 25px;
+    margin: ${props => (props.innerPage ? '25px' : '50px')} auto 25px;
     padding: 25px;
   }
 
