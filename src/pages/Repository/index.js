@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import chroma from 'chroma-js';
-import { FaArrowRight, FaArrowLeft, FaSpinner, FaStar } from 'react-icons/fa';
+import {
+  FaArrowRight,
+  FaArrowLeft,
+  FaSpinner,
+  FaStar,
+  FaCodeBranch,
+} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -10,6 +16,7 @@ import Container from '../../components/Container';
 import {
   Loading,
   Owner,
+  Counters,
   IssueList,
   IssueFilter,
   FilterButton,
@@ -128,10 +135,16 @@ class Repository extends Component {
           <img src={repository.owner.avatar_url} alt={repository.owner.login} />
           <h1>{repository.name}</h1>
           <p>{repository.description}</p>
-          <span className="stars">
-            <FaStar />
-            {repository.stargazers_count}
-          </span>
+          <Counters>
+            <span>
+              <FaStar />
+              {repository.stargazers_count}
+            </span>
+            <span>
+              <FaCodeBranch />
+              {repository.forks_count}
+            </span>
+          </Counters>
         </Owner>
 
         <IssueFilter>
