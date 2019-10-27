@@ -81,10 +81,14 @@ export const Owner = styled.div`
     text-align: center;
     max-width: 400px;
   }
+`;
 
-  .stars {
+export const Counters = styled.div`
+  margin-top: 15px;
+
+  span {
     display: inline-flex;
-    margin-top: 10px;
+    margin: 0 10px;
     align-items: center;
     font-size: 11px;
     font-weight: bold;
